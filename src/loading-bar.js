@@ -102,6 +102,20 @@ angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
             }
             reqsTotal++;
             cfpLoadingBar.set(reqsCompleted / reqsTotal);
+            
+            config.eventHandlers = {
+              progress: function(c) {
+                  var p = c.loaded / c.total;
+                  cfpLoadingBar.set(p);
+              }
+            };
+            
+            config.uploadEventHandlers = {
+                progress: function(c) {
+                  var p = c.loaded / c.total;
+                  cfpLoadingBar.set(p);
+                }
+            };
           }
           return config;
         },
